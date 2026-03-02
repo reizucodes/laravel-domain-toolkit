@@ -30,27 +30,38 @@ class MakeRepository extends Command
     {
         $name = $this->argument('name');
         $includeService = $this->option('s');
+        $serviceOnly = $this->option('s-only');
 
         if (empty($name)) {
             $this->error("Invalid repository name.");
             return Command::FAILURE;
         }
 
-        $interfaceCreated = $this->generateInterface($name);
-        $repoCreated = $this->generateRepository($name);
-        $serviceCreated = $includeService ? $this->generateService($name) : false;
+        $interfaceCreated = $repoCreated = $serviceCreated = false;
+
+        if($serviceOnly) {
+            $serviceCreated = $this->generateService($name);
+        } else {
+            $interfaceCreated = $this->generateInterface($name);
+            $repoCreated = $this->generateRepository($name);
+            $serviceCreated = $includeService ? $this->generateService($name) : false;
+            $this->bindToServiceProvider($name);
+        }
 
         if (!$interfaceCreated && !$repoCreated && !$serviceCreated) {
             $this->warn("No files created or overwritten.");
             return Command::FAILURE;
         }
 
-        $this->bindToServiceProvider($name);
-
-        $message = ["{$name} Repository and Interface created successfully."];
-        if ($includeService) {
-            $message[] = "Service file included.";
+        if($serviceOnly && $serviceCreated) {
+            $message = ["{$name} Service created successfully."];
+        } else {
+            $message = ["{$name} Repository and Interface created successfully."];
+            if ($includeService) {
+                $message[] = "Service file included.";
+            }
         }
+
         $this->info(implode(' ', $message));
 
         return Command::SUCCESS;

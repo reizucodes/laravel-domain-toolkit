@@ -88,6 +88,8 @@ If you want to generate a corresponding service file, add the `--s` flag:
 This will additionally create:
 - `app/Services/UserService.php`
 
+Use `--s-only` flag if you only want to create the service file.
+
 Modify these files according to your needs.
 
 ## License
