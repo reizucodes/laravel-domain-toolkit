@@ -1,15 +1,15 @@
 <?php
 
-namespace BlaiseBueno\LaravelRepository;
+namespace BlaiseBueno\LaravelDomainToolkit;
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelRepositoryServiceProvider extends ServiceProvider
+class DomainToolkitServiceProvider extends ServiceProvider
 {
     /** 
     * Tag name used for publishing repository stubs. 
     */
-    public const TAG = 'laravel-repository';
+    public const TAG = 'laravel-domain-toolkit';
     /**
      * Bootstrap any package services.
      *
@@ -21,11 +21,11 @@ class LaravelRepositoryServiceProvider extends ServiceProvider
      * - Only runs during `vendor:publish` command.
      * - Supports `--force` to overwrite existing files.
      * - Logs skipped files to the console.
-     * - Tags publishable files under `laravel-repository`.
+     * - Tags publishable files under `laravel-domain-toolkit`.
      *
      * Usage:
-     *  php artisan vendor:publish --tag=laravel-repository
-     *  php artisan vendor:publish --tag=laravel-repository --force
+     *  php artisan vendor:publish --tag=laravel-domain-toolkit
+     *  php artisan vendor:publish --tag=laravel-domain-toolkit --force
      *
      * @return void
      */
