@@ -1,5 +1,5 @@
 {
-    "name": "blaisebueno/laravel-domain-toolkit",
+    "name": "reizucodes/laravel-domain-toolkit",
     "description": "A Laravel layered architecture toolkit providing repository abstraction, service scaffolding, DTO generation, and domain orchestration.",
     "type": "library",
     "license": "MIT",
@@ -34,6 +34,6 @@
             ]
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
