@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ serviceReturnNamespace }};
+use App\Repositories\Interfaces\{{ interface }};
+
+class {{ class }}
+{
+    public function __construct(
+        protected {{ interface }} $repository
+    ) {}
+
+    public function example(): ServiceReturn
+    {
+        return ServiceReturn::success();
+    }
+}

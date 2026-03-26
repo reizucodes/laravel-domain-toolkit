@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }};
+
+class {{ class }}
+{
+    public function __construct(
+        // public string $name
+    ) {}
+
+    public function toArray(): array
+    {
+        /**
+         * NOTE:
+         * Replace this with explicit field mapping once your DTO properties are defined.
+         *
+         * Example:
+         * return [
+         *     'name' => $this->name,
+         *     'email' => $this->email,
+         * ];
+         */
+        return get_object_vars($this);
+    }
+}
