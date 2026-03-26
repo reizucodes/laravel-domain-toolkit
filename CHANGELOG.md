@@ -51,7 +51,7 @@ This release transforms the package from a simple repository generator into a fu
 ## Breaking Changes
 
 - Package name has changed:
-  - `blaisebueno/laravel-repository` → `blaisebueno/laravel-domain-toolkit`
+  - `blaisebueno/laravel-repository` → `reizucodes/laravel-domain-toolkit`
 - Commands are no longer published to `app/Console/Commands`
 - You must run:
   ```sh
@@ -71,7 +71,7 @@ This release transforms the package from a simple repository generator into a fu
 
 2. Install new package:
    ```sh
-   composer require blaisebueno/laravel-domain-toolkit
+   composer require reizucodes/laravel-domain-toolkit
    ```
 
 3. Publish toolkit resources:

@@ -45,7 +45,7 @@ This package supports:
 ### Step 1: Install via Composer
 
 ```sh
-composer require blaisebueno/laravel-domain-toolkit
+composer require reizucodes/laravel-domain-toolkit
 ```
 
 ---
