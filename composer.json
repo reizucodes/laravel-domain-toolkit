@@ -1,6 +1,6 @@
 {
     "name": "reizucodes/laravel-domain-toolkit",
-    "description": "A Laravel layered architecture toolkit providing repository abstraction, service scaffolding, DTO generation, and domain orchestration.",
+    "description": "Laravel toolkit for layered architecture with repositories, services, DTOs, and domain scaffolding.",
     "type": "library",
     "license": "MIT",
     "authors": [
