@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.0.4] - 2026-03-27
+
+### Fixed
+- Correct DTO generator parsing for nested paths (e.g. Auth/User)
+- Prevent duplicate `Dto` suffix (e.g. UserDTODto → UserDto)
+
 ## [2.0.0] - 2026-03-27
 
 ### Major Release: Laravel Domain Toolkit
