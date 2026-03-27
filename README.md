@@ -230,26 +230,63 @@ app/Services/UserService.php
 ## Generate a DTO
 
 ```sh
-php artisan make:dto CreateUserDTO
+php artisan make:dto User
 ```
 
 Creates:
 
 ```
-app/DTO/CreateUserDTO.php
+app/DTO/UserDto.php
 ```
 
-You may optionally specify a folder:
+---
+
+### Nested DTOs (Recommended)
+
+You can generate DTOs inside folders using slash notation:
 
 ```sh
-php artisan make:dto CreateUserDTO Auth
+php artisan make:dto Auth/User
 ```
 
 Creates:
 
 ```
-app/DTO/Auth/CreateUserDTO.php
+app/DTO/Auth/UserDto.php
 ```
+
+Namespace:
+
+```php
+App\DTO\Auth\UserDto
+```
+
+---
+
+### DTO Naming Rules
+
+The generator automatically:
+
+- Converts names to StudlyCase
+- Ensures a single `Dto` suffix
+- Prevents duplicate suffixes
+
+Examples:
+
+| Input | Output |
+|------|--------|
+| `User` | `UserDto` |
+| `UserDto` | `UserDto` |
+| `user_dto` | `UserDto` |
+| `Auth/UserDTO` | `Auth/UserDto` |
+
+---
+
+### Notes
+
+- Nested paths (`Auth/User`) are the standard way to define folders
+- Folder structure is automatically reflected in the namespace
+- Existing files will prompt for overwrite unless `--force` is used
 
 ---
 

@@ -11,20 +11,19 @@ class MakeDto extends Command
 {
     use ResolvesStubPath;
 
-    protected $signature = "make:dto {name} {folder?} {--force : Overwrite existing file}";
+    protected $signature = "make:dto {name} {--force : Overwrite existing file}";
     protected $description = "Create a new DTO class.";
 
     public function handle(): int
     {
         $name = trim($this->argument('name'));
-        $folder = $this->argument('folder');
 
         if (empty($name)) {
             $this->error("Invalid DTO name.");
             return Command::FAILURE;
         }
 
-        $path = $this->generateDto($name, $folder);
+        $path = $this->generateDto($name);
 
         if (!$path) {
             $this->warn("No files created.");
@@ -36,31 +35,42 @@ class MakeDto extends Command
         return Command::SUCCESS;
     }
 
-    protected function generateDto(string $name, ?string $folder): string|false
+    protected function generateDto(string $name): string|false
     {
-        $class = Str::studly($name);
+        // 1. Split input into segments
+        $segments = preg_split('/[\/\\\\]+/', $name);
+        $segments = array_filter($segments);
 
-        if (!str_ends_with($class, 'Dto')) {
-            $class .= 'Dto';
-        }
+        // 2. Extract class name (last segment)
+        $rawClass = array_pop($segments);
 
-        $folder = $folder
-            ? collect(preg_split('/[\/\\\\]+/', $folder))
-                ->filter()
-                ->map(fn ($part) => Str::studly($part))
-                ->implode('\\')
-            : null;
+        // 3. Normalize class name
+        $class = Str::studly($rawClass);
+        $class = preg_replace('/Dto$/i', '', $class); // remove existing suffix
+        $class .= 'Dto';
 
-        $namespace = $folder
-            ? "App\\DTO\\{$folder}"
+        // 4. Normalize folder segments
+        $folderNamespace = collect($segments)
+            ->map(fn ($part) => Str::studly($part))
+            ->implode('\\');
+
+        // 5. Build namespace
+        $namespace = $folderNamespace
+            ? "App\\DTO\\{$folderNamespace}"
             : "App\\DTO";
 
-        $path = $folder
-            ? "app/DTO/" . str_replace('\\', '/', $folder) . "/{$class}.php"
+        // 6. Build path
+        $folderPath = $folderNamespace
+            ? str_replace('\\', '/', $folderNamespace)
+            : null;
+
+        $path = $folderPath
+            ? "app/DTO/{$folderPath}/{$class}.php"
             : "app/DTO/{$class}.php";
 
         $absolutePath = base_path($path);
 
+        // 7. Load stub
         $stub = File::get($this->resolveStub('dto.stub'));
 
         $content = str_replace(
