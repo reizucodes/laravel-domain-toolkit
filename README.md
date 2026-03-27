@@ -173,7 +173,7 @@ return ServiceReturn::clientError('Invalid input');
 You can convert responses to JSON:
 
 ```php
-return $serviceResult->toJsonResponse();
+return $serviceReturn->toJsonResponse();
 ```
 
 If your application defines:
